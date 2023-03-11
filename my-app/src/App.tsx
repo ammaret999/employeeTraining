@@ -1,10 +1,6 @@
+import React from 'react';
 import { Routes, Route } from "react-router-dom";
-import React from "react";
-
-//login
-import Login from './menuUser/login';
-import Home from "./menuUser/home";
-import CreateEmployee from "./menuUser/createEmployee";
+import { CreateEmployee, Home, Login } from './pages';
 
 function App() {
   return (

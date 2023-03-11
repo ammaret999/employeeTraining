@@ -1,5 +1,6 @@
-import Navbar from "../component/navbar";
-function Home() {
+import {Navbar} from "../components"
+import React from "react"
+export const Home = () => {
   return (
     <>
       <Navbar />
@@ -13,7 +14,7 @@ function Home() {
               <img
                 className="object-fill h-80 w-80 object-center bg-black "
                 src="https://hips.hearstapps.com/hmg-prod/images/little-cute-maltipoo-puppy-royalty-free-image-1652926025.jpg?crop=0.444xw:1.00xh;0.129xw,0&resize=980:*"
-                alt="image"
+                alt="dogs image"
               />
             </figure>
             <div className="card-body ">
@@ -49,4 +50,3 @@ function Home() {
     </>
   );
 }
-export default Home;
