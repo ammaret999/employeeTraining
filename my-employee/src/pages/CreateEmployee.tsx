@@ -1,5 +1,4 @@
 import {Navbar} from "../components/Navbar"
-import React from "react"
 
 export const CreateEmployee = () =>  {
   return (
@@ -223,7 +222,7 @@ export const CreateEmployee = () =>  {
             </div>
           </form>
 
-          <div className="grid grid-cols-12 gap-4 ">
+          <div className="grid grid-cols-12 gap-4 mb-3">
             <div className="col-span-6 justify-items-end grid">
               <button className="btn">Submit</button>
             </div>
