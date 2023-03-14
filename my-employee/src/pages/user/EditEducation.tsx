@@ -1,6 +1,6 @@
-import {Navbar} from "../components/Navbar"
+import {Navbar} from "../../components/Navbar"
 
-export const CreateEducation = () =>  {
+export const EditEducation = () =>  {
   return (
     <>
       <Navbar />
@@ -9,7 +9,7 @@ export const CreateEducation = () =>  {
 
             <div className="col-span-8 justify-center gap-4 shadow-xl bg-gray-50 mt-5">
                 <div className="flex justify-center mt-5">
-                    <p className="text-2xl">Create Education</p>
+                    <p className="text-2xl">Edit Education</p>
                 </div>
 
                 <form>

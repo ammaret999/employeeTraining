@@ -1,6 +1,6 @@
-import {Navbar} from "../components/Navbar"
+import {Navbar} from "../../components/Navbar"
 
-export const EditWorkHistory = () =>  {
+export const CreateEducation = () =>  {
   return (
     <>
       <Navbar />
@@ -9,46 +9,37 @@ export const EditWorkHistory = () =>  {
 
             <div className="col-span-8 justify-center gap-4 shadow-xl bg-gray-50 mt-5">
                 <div className="flex justify-center mt-5">
-                    <p className="text-2xl">Edit Work History</p>
+                    <p className="text-2xl">Create Education</p>
                 </div>
 
                 <form>
-                    <div className="grid gap-6 mb-6 grid-cols-2 m-4">
+                <div className="grid gap-6 mb-6 grid-cols-2 m-4">
+
+                <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Level
+                    </label>
+                    <select
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="First name"
+                    >
+                    <option value=""></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    </select>
+                </div>
+
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Company
+                  Institution
                 </label>
                 <input
                   type="text"
                   id="Pnumber"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Company"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  StartDate
-                </label>
-                <input
-                  type="date"
-                  id="sdate"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="StartDate"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  EndDate
-                </label>
-                <input
-                  type="date"
-                  id="sdate"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="StartDate"
+                  placeholder="Certificate"
                   required
                 />
               </div>
