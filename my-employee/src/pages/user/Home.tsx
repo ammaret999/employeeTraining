@@ -1,4 +1,4 @@
-import {Navbar} from "../../components/Navbar"
+import { Navbar } from "../../components/Navbar";
 export const Home = () => {
   return (
     <>
@@ -42,10 +42,13 @@ export const Home = () => {
               </div>
             </div>
           </div>
+
+
+          
         </div>
 
         <div className="col-span-2"></div>
       </div>
     </>
   );
-}
+};
