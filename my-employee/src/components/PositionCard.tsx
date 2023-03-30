@@ -1,16 +1,26 @@
 import React from "react";
 
-export const PositionCard: React.FC = () => {
+interface PositionCardProps {
+  position: string;
+  salaryMin: number;
+  salaryMax: number;
+}
+
+export const PositionCard: React.FC<PositionCardProps> = ({
+  position,
+  salaryMax,
+  salaryMin,
+}) => {
   return (
     <>
       <div className="col-span-4 bg-gray-100 justify-center">
         <div className="card bg-base-100 shadow-xl ">
-          <div className="card-body">
-            <h2 className="card-title justify-center"></h2>
+          <div className="card-body ">
+            <h1 className="card-title justify-center">{position}</h1>
             <div className="flex justify-center">
-              <h2 className="card-title justify-center"></h2>
-              <h2 className="card-title justify-center">-</h2>
-              <h2 className="card-title justify-center"></h2>
+              <h2 className="card-title justify-center m-2">{salaryMin}</h2>
+              <h3 className="card-title justify-center m-2">-</h3>
+              <h2 className="card-title justify-center m-2">{salaryMax}</h2>
             </div>
             <div className="card-actions justify-between">
               <button className="btn btn-primary">Edit</button>

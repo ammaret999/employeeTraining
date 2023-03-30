@@ -1,9 +1,17 @@
-import { Navbar } from "../../../components/NavbarAdmin";
-import { DepartmentCard } from "../../../components/DepartmentCard";
-export const Department = () => {
+import { NavbarAdmin } from "../../components/NavbarAdmin";
+import { DepartmentCard } from "../../components/DepartmentCard";
+import { Department } from "../../types";
+import { useEffect, useState } from "react";
+import { getDepartment } from "../../services";
+export const DepartmentPage = () => {
+  const [department, setDepartment] = useState<Department[]>([]);
+
+  useEffect(() => {
+    getDepartment().then((data: Department[]) => setDepartment(data));
+  }, []);
   return (
     <>
-      <Navbar />
+      <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>
         <div className="col-span-8 justify-center gap-4 shadow-xl bg-gray-50 mt-5">
@@ -17,7 +25,11 @@ export const Department = () => {
           </div>
 
           <form>
-            <div className="grid gap-6 mb-6 grid-cols-12 m-4"></div>
+            <div className="grid gap-6 mb-6 grid-cols-12 m-4">
+              {department.map((data) => (
+                <DepartmentCard {...data} />
+              ))}
+            </div>
           </form>
 
           <div className="grid gap-6 mb-6 grid-cols-2 m-4"></div>

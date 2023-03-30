@@ -1,9 +1,18 @@
-import { Navbar } from "../../../components/NavbarAdmin";
-import { LevelCard } from "../../../components/LevelCard";
-export const Level = () => {
+import { NavbarAdmin } from "../../components/NavbarAdmin";
+import { LevelCard } from "../../components/LevelCard";
+import { getLevel } from "../../services/level";
+import { useEffect, useState } from "react";
+import { Level } from "../../types";
+
+export const LevelPage = () => {
+    const [level, setLevel] = useState<Level[]>([]);
+
+    useEffect(() => {
+      getLevel().then((data: Level[]) => setLevel(data));
+    }, []);
   return (
     <>
-      <Navbar />
+      <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>
         <div className="col-span-8 justify-center gap-4 shadow-xl bg-gray-50 mt-5">
@@ -17,7 +26,11 @@ export const Level = () => {
           </div>
 
           <form>
-            <div className="grid gap-6 mb-6 grid-cols-12 m-4"></div>
+            <div className="grid gap-6 mb-6 grid-cols-12 m-4">
+              {level.map((data) => (
+                <LevelCard {...data} />
+              ))}
+            </div>
           </form>
 
           <div className="grid gap-6 mb-6 grid-cols-2 m-4"></div>

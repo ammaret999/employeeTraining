@@ -1,6 +1,6 @@
 import React from "react"
 
-export const Navbar:React.FC = () =>  {
+export const NavbarAdmin:React.FC = () =>  {
   return (
     <>
       <div className="navbar bg-base-100">

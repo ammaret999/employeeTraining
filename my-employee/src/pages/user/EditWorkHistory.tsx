@@ -1,19 +1,19 @@
-import {Navbar} from "../../components/Navbar"
+import { NavbarUser } from "../../components";
 
-export const EditWorkHistory = () =>  {
+export const EditWorkHistory = () => {
   return (
     <>
-      <Navbar />
-        <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-2"></div>
+      <NavbarUser />
+      <div className="grid grid-cols-12 gap-4">
+        <div className="col-span-2"></div>
 
-            <div className="col-span-8 justify-center gap-4 shadow-xl bg-gray-50 mt-5">
-                <div className="flex justify-center mt-5">
-                    <p className="text-2xl">Edit Work History</p>
-                </div>
+        <div className="col-span-8 justify-center gap-4 shadow-xl bg-gray-50 mt-5">
+          <div className="flex justify-center mt-5">
+            <p className="text-2xl">Edit Work History</p>
+          </div>
 
-                <form>
-                    <div className="grid gap-6 mb-6 grid-cols-2 m-4">
+          <form>
+            <div className="grid gap-6 mb-6 grid-cols-2 m-4">
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Company
@@ -53,7 +53,7 @@ export const EditWorkHistory = () =>  {
                 />
               </div>
 
-            <div>
+              <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Discription
                 </label>
@@ -76,11 +76,10 @@ export const EditWorkHistory = () =>  {
               <button className="btn">Cancle</button>
             </div>
           </div>
-
-            </div>
-        
-            <div className="col-span-2"></div>
         </div>
+
+        <div className="col-span-2"></div>
+      </div>
     </>
-  )
-}
+  );
+};

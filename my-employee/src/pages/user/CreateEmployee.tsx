@@ -1,9 +1,9 @@
-import {Navbar} from "../../components/Navbar"
+import { NavbarUser } from "../../components";
 
-export const CreateEmployee = () =>  {
+export const CreateEmployee = () => {
   return (
     <>
-      <Navbar />
+      <NavbarUser />
 
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>
@@ -106,9 +106,7 @@ export const CreateEmployee = () =>  {
               </div>
 
               <div>
-                <label
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Bright day
                 </label>
                 <input
@@ -236,4 +234,4 @@ export const CreateEmployee = () =>  {
       </div>
     </>
   );
-}
+};

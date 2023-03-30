@@ -1,9 +1,9 @@
-import { Navbar } from "../../../components/NavbarAdmin";
+import { NavbarAdmin } from "../../components/NavbarAdmin";
 
 export const EditLevel = () => {
   return (
     <>
-      <Navbar />
+      <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>
 

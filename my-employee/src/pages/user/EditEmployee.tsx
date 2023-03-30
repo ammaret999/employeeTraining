@@ -1,9 +1,8 @@
-import {Navbar} from "../../components/Navbar"
-
+import { NavbarUser } from "../../components";
 export const EditEmployee = () => {
-    return (
+  return (
     <>
-      <Navbar />
+      <NavbarUser />
 
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>
@@ -11,17 +10,27 @@ export const EditEmployee = () => {
         <div className="col-span-8 justify-center gap-4 shadow-xl bg-gray-50 mt-5">
           <div className="flex justify-end mt-5">
             <div className="form-control">
-                <label className="label cursor-pointer">
-                    <span className="label-text">Active</span> 
-                    <input type="radio" name="radio-10" className="radio checked:bg-blue-500" checked />
-                </label>
-                </div>
-                <div className="form-control">
-                <label className="label cursor-pointer">
-                    <span className="label-text">Not Active</span> 
-                    <input type="radio" name="radio-10" className="radio checked:bg-red-500" checked />
-                </label>
-                </div>
+              <label className="label cursor-pointer">
+                <span className="label-text">Active</span>
+                <input
+                  type="radio"
+                  name="radio-10"
+                  className="radio checked:bg-blue-500"
+                  checked
+                />
+              </label>
+            </div>
+            <div className="form-control">
+              <label className="label cursor-pointer">
+                <span className="label-text">Not Active</span>
+                <input
+                  type="radio"
+                  name="radio-10"
+                  className="radio checked:bg-red-500"
+                  checked
+                />
+              </label>
+            </div>
           </div>
 
           <div className="flex justify-center mt-5">
@@ -121,9 +130,7 @@ export const EditEmployee = () => {
               </div>
 
               <div>
-                <label
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Bright day
                 </label>
                 <input
@@ -264,4 +271,4 @@ export const EditEmployee = () => {
       </div>
     </>
   );
-}
+};

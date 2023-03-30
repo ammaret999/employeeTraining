@@ -1,8 +1,8 @@
-import { Navbar } from "../../components/NavbarAdmin";
+import { NavbarAdmin } from "../../components";
 export const HomeAdmin = () => {
   return (
     <>
-      <Navbar />
+      <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>
         <div className="col-span-8 justify-center gap-4 shadow-xl bg-gray-50 mt-5">

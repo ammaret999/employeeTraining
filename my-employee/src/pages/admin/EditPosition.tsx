@@ -1,9 +1,9 @@
-import { Navbar } from "../../../components/NavbarAdmin";
+import { NavbarAdmin } from "../../components/NavbarAdmin";
 
-export const CreatePosition = () => {
+export const EditPosition = () => {
   return (
     <>
-      <Navbar />
+      <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>
 
@@ -12,7 +12,7 @@ export const CreatePosition = () => {
             <button className="btn"> Back </button>
           </div>
           <div className="flex justify-center mt-5">
-            <p className="text-2xl">Create Position</p>
+            <p className="text-2xl">Edit Position</p>
           </div>
 
           <form>
