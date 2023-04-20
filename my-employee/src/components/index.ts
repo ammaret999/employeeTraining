@@ -5,4 +5,4 @@ export * from "./GenderCard";
 export * from "./HomeUserCard";
 export * from "./LevelCard";
 export * from "./NavbarUser";
-export * from "./TitleNameCard"
+export * from "./TitleNameCard";

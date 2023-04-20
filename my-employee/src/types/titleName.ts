@@ -3,3 +3,12 @@ export interface TitleName {
   code: string;
   titleName: string;
 }
+
+export interface TitleNameCreate {
+   titleName: string;
+}
+
+export interface TitleNameEdit {
+   code: string;
+   titleName: string;
+}

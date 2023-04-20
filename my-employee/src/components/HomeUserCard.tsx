@@ -17,13 +17,9 @@ export const HomeUserCard: React.FC<Employee> = ({
   const [imageBase64, setImageBase64] = useState<ImageBase64>();
 
   useEffect(() => {
-    try {
-      fetch(`http://localhost:8080/file/${code}`)
-        .then((Response) => Response.json())
-        .then((imageBase64) => setImageBase64(imageBase64));
-    } catch (e) {
-      console.error(e);
-    }
+    fetch(`http://localhost:8080/file/${code}`)
+      .then((Response) => Response.json())
+      .then((imageBase64) => setImageBase64(imageBase64));
   }, []);
 
   return (

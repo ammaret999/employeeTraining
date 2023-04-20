@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { NavbarAdmin } from "../../components";
 export const HomeAdmin = () => {
+  const navagate = useNavigate();
+
   return (
     <>
       <NavbarAdmin />
@@ -12,22 +15,32 @@ export const HomeAdmin = () => {
 
           <div className="mb-6 m-4 flex justify-around">
             <div className="">
-              <button className="btn">Level</button>
+              <button className="btn" onClick={() => navagate(`level`)}>
+                Level
+              </button>
             </div>
             <div className="">
-              <button className="btn">Title Name</button>
+              <button className="btn" onClick={() => navagate(`title_name`)}>
+                Title Name
+              </button>
             </div>
             <div className="">
-              <button className="btn">Gender</button>
+              <button className="btn" onClick={() => navagate(`gender`)}>
+                Gender
+              </button>
             </div>
           </div>
 
           <div className="mb-6 m-4 flex justify-around">
             <div className="">
-              <button className="btn">Department</button>
+              <button className="btn" onClick={() => navagate(`department`)}>
+                Department
+              </button>
             </div>
             <div className="">
-              <button className="btn">Position</button>
+              <button className="btn" onClick={() => navagate(`position`)}>
+                Position
+              </button>
             </div>
           </div>
         </div>

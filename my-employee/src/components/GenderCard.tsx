@@ -1,12 +1,21 @@
-import React from "react"
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface GenderCardProps {
+  code: string;
   gender: string;
 }
 
-export const GenderCard: React.FC<GenderCardProps> = ({
-  gender
-}) => {
+export const GenderCard: React.FC<GenderCardProps> = ({ code, gender }) => {
+  const navagate = useNavigate();
+
+  function deleteGender(code: string) {
+    fetch(`http://localhost:8080/admin/gender/${code}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json();
+    });
+  }
   return (
     <>
       <div className="col-span-4 bg-gray-100 justify-center">
@@ -14,8 +23,18 @@ export const GenderCard: React.FC<GenderCardProps> = ({
           <div className="card-body">
             <h2 className="card-title justify-center">{gender}</h2>
             <div className="card-actions justify-between">
-              <button className="btn btn-primary">Edit</button>
-              <button className="btn btn-primary">Delete</button>
+              <button
+                className="btn btn-primary"
+                onClick={() => navagate(`/admin/home/gender/edit/${code}`)}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => deleteGender(code)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>

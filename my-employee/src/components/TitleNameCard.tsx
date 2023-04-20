@@ -1,12 +1,25 @@
-import React from "react"
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface TitleNameCardProps {
+  code: string;
   titleName: string;
 }
 
 export const TitleNameCard: React.FC<TitleNameCardProps> = ({
-  titleName
+  code,
+  titleName,
 }) => {
+  const navagate = useNavigate();
+
+  function deleteTitleName(code: string) {
+    fetch(`http://localhost:8080/admin/title/${code}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json();
+    });
+  }
+
   return (
     <>
       <div className="col-span-4 bg-gray-100 justify-center">
@@ -14,8 +27,18 @@ export const TitleNameCard: React.FC<TitleNameCardProps> = ({
           <div className="card-body">
             <h2 className="card-title justify-center">{titleName}</h2>
             <div className="card-actions justify-between">
-              <button className="btn btn-primary">Edit</button>
-              <button className="btn btn-primary">Delete</button>
+              <button
+                className="btn btn-primary"
+                onClick={() => navagate(`/admin/home/title_name/edit/${code}`)}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => deleteTitleName(code)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>

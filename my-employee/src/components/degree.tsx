@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TitleNameCard: React.FC = ({}) => {
+export const Degree: React.FC = ({}) => {
   return (
     <>
       <div className="col-span-4 grid justify-center">

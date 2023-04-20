@@ -39,7 +39,9 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/employee" element={<CreateEmployee />} />
       <Route path="/employee/edit" element={<EditEmployee />} />
-      <Route path="/profile" element={<Profile />} />
+
+      <Route path="/profile/:code" element={<Profile />} />
+
       <Route path="/work_history" element={<CreateWorkHistory />} />
       <Route path="/work_history/edit" element={<EditWorkHistory />} />
       <Route path="/certificate" element={<CreateCertificate />} />
@@ -47,23 +49,38 @@ function App() {
       <Route path="/education" element={<CreateEducation />} />
       <Route path="/education/edit" element={<EditEducation />} />
 
-      <Route path="/admin_login" element={<LoginAdmin />} />
-      <Route path="/admin_home" element={<HomeAdmin />} />
-      <Route path="/level" element={<LevelPage />} />
-      <Route path="/level/edit" element={<EditLevel />} />
-      <Route path="/level/create" element={<CreateLevel />} />
-      <Route path="/title_name" element={<TitleNamePage />} />
-      <Route path="/title_name/create" element={<CreateTitleName />} />
-      <Route path="/title_name/edit" element={<EditTitleName />} />
-      <Route path="/gender" element={<GenderPage />} />
-      <Route path="/gender/create" element={<CreateGender />} />
-      <Route path="/gender/edit" element={<EditGender />} />
-      <Route path="/department" element={<DepartmentPage />} />
-      <Route path="/department/create" element={<CreateDepartment />} />
-      <Route path="/department/edit" element={<EditDepartment />} />
-      <Route path="/position" element={<PositionPage />} />
-      <Route path="/position/create" element={<CreatePosition />} />
-      <Route path="/position/edit" element={<EditPosition />} />
+      <Route path="/admin/login" element={<LoginAdmin />} />
+      <Route path="/admin/home" element={<HomeAdmin />} />
+      <Route path="/admin/home/level" element={<LevelPage />} />
+      <Route path="/admin/home/level/edit/:code" element={<EditLevel />} />
+      <Route path="/admin/home/level/create" element={<CreateLevel />} />
+      <Route path="/admin/home/title_name" element={<TitleNamePage />} />
+      <Route
+        path="/admin/home/title_name/create"
+        element={<CreateTitleName />}
+      />
+      <Route
+        path="/admin/home/title_name/edit/:code"
+        element={<EditTitleName />}
+      />
+      <Route path="/admin/home/gender" element={<GenderPage />} />
+      <Route path="/admin/home/gender/create" element={<CreateGender />} />
+      <Route path="/admin/home/gender/edit/:code" element={<EditGender />} />
+      <Route path="/admin/home/department" element={<DepartmentPage />} />
+      <Route
+        path="/admin/home/department/create"
+        element={<CreateDepartment />}
+      />
+      <Route
+        path="/admin/home/department/edit/:code"
+        element={<EditDepartment />}
+      />
+      <Route path="/admin/home/position" element={<PositionPage />} />
+      <Route path="/admin/home/position/create" element={<CreatePosition />} />
+      <Route
+        path="/admin/home/position/edit/:code"
+        element={<EditPosition />}
+      />
     </Routes>
   );
 }

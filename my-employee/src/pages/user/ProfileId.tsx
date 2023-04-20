@@ -2,25 +2,9 @@ import { useEffect, useState } from "react";
 import { NavbarUser } from "../../components";
 import { getUserById } from "../../services";
 import { Employee, ImageBase64 } from "../../types";
-import { useParams } from "react-router-dom";
 
-export const Profile = () => {
+export const ProfileId = () => {
   const [employee, setEmployee] = useState<Employee[]>([]);
-  const { userCode } = useParams();
-
-  async function getEmployee(employeeCode: any) {
-    try {
-      await fetch(`http://localhost:8080/employee/${employeeCode}`)
-        .then((Response) => Response.json())
-        .then((setEmployee) => Response);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  useEffect(() => {
-    getEmployee(userCode);
-  }, [userCode]);
 
   return (
     <>
@@ -55,7 +39,7 @@ export const Profile = () => {
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Title name
                 </label>
-                <div></div>
+                <div>Mr.</div>
               </div>
 
               <div>

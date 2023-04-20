@@ -19,7 +19,7 @@ export const Home = () => {
         <div className="col-span-8 justify-center gap-4">
           <div className="card card-side bg-base-100 shadow-xl m-4 grid grid-cols-12">
             {employee.map((data) => (
-              <HomeUserCard {...data} />
+              <HomeUserCard {...data} key={data.id} />
             ))}
           </div>
         </div>

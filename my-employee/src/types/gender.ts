@@ -3,3 +3,11 @@ export interface Gender {
   code: string;
   gender: string;
 }
+export interface GenderCreate {
+   gender: string;
+}
+
+export interface GenderEdit {
+   code: string;
+   gender: string;
+}

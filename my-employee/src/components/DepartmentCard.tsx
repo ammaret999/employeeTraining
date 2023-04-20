@@ -1,10 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface DepartmentCardProps {
+  code: string;
   department: string;
 }
 
-export const DepartmentCard: React.FC<DepartmentCardProps> = ({ department }) => {
+export const DepartmentCard: React.FC<DepartmentCardProps> = ({
+  code,
+  department,
+}) => {
+  const navagate = useNavigate();
+
+  function deleteDepartment(code: string) {
+    fetch(`http://localhost:8080/admin/department/${code}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json();
+    });
+  }
   return (
     <>
       <div className="col-span-4 bg-gray-100 justify-center">
@@ -12,8 +25,18 @@ export const DepartmentCard: React.FC<DepartmentCardProps> = ({ department }) =>
           <div className="card-body">
             <h2 className="card-title justify-center">{department}</h2>
             <div className="card-actions justify-between">
-              <button className="btn btn-primary">Edit</button>
-              <button className="btn btn-primary">Delete</button>
+              <button
+                className="btn btn-primary"
+                onClick={() => navagate(`/admin/home/department/edit/${code}`)}
+              >
+                Edit
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => deleteDepartment(code)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>

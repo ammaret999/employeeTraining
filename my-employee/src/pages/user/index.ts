@@ -3,6 +3,7 @@ export * from "./Home";
 export * from "./Login";
 export * from "./EditEmployee";
 export * from "./Profile";
+export * from "./ProfileId";
 export * from "./CreateWorkHistory";
 export * from "./EditWorkHistory";
 export * from "./CreateCertificate";

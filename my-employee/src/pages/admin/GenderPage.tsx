@@ -3,9 +3,11 @@ import { GenderCard } from "../../components/GenderCard";
 import { Gender } from "../../types/gender";
 import { getGender } from "../../services";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const GenderPage = () => {
   const [gender, setgender] = useState<Gender[]>([]);
+  const navagate = useNavigate();
 
   useEffect(() => {
     getGender().then((data: Gender[]) => setgender(data));
@@ -18,8 +20,14 @@ export const GenderPage = () => {
         <div className="col-span-2"></div>
         <div className="col-span-8 justify-center gap-4 shadow-xl bg-gray-50 mt-5">
           <div className="flex justify-between m-8">
-            <button className="btn"> Back </button>
-            <button className="btn"> Create Gender </button>
+            <button className="btn" onClick={() => navagate(`/admin/home/`)}>
+              {" "}
+              Back{" "}
+            </button>
+            <button className="btn" onClick={() => navagate(`create`)}>
+              {" "}
+              Create Gender{" "}
+            </button>
           </div>
 
           <div className="flex justify-center mt-4">
@@ -29,7 +37,7 @@ export const GenderPage = () => {
           <form>
             <div className="grid gap-6 mb-6 grid-cols-12 m-4">
               {gender.map((data) => (
-                <GenderCard {...data} />
+                <GenderCard {...data} key={data.id} />
               ))}
             </div>
           </form>
