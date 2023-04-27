@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavbarUser, HomeUserCard } from "../../components";
 import { getEmployee } from "../../services/homeUser";
 import { Employee } from "../../types";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const Home = () => {
   const [employee, setEmployee] = useState<Employee[]>([]);
@@ -13,7 +14,6 @@ export const Home = () => {
   return (
     <>
       <NavbarUser />
-
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>
         <div className="col-span-8 justify-center gap-4">

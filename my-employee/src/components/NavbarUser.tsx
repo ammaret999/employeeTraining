@@ -15,16 +15,8 @@ export const NavbarUser: React.FC = () => {
           </a>
         </div>
         <div className="flex-none gap-2">
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered"
-            />
-          </div>
-
           <div className="">
-            <button className="btn" onClick={() => navagate(`/`)}>
+            <button className="btn" onClick={() => navagate(`/search`)}>
               Search
             </button>
           </div>
@@ -36,9 +28,9 @@ export const NavbarUser: React.FC = () => {
           </div>
 
           <div className="dropdown dropdown-end">
-            <div className="btn" onClick={() => navagate(`/`)}>
+            <a className="btn" href="http://localhost:8080/logout">
               Logout
-            </div>
+            </a>
           </div>
         </div>
       </div>

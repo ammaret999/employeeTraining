@@ -11,6 +11,7 @@ import {
   EditCertificate,
   CreateEducation,
   EditEducation,
+  Search,
 } from "./pages/user";
 import {
   LoginAdmin,
@@ -38,8 +39,9 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/employee" element={<CreateEmployee />} />
-      <Route path="/employee/edit" element={<EditEmployee />} />
+      <Route path="/search" element={<Search />} />
 
+      <Route path="/profile/edit/:code" element={<EditEmployee />} />
       <Route path="/profile/:code" element={<Profile />} />
 
       <Route path="/work_history" element={<CreateWorkHistory />} />
