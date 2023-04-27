@@ -31,8 +31,9 @@ export const EditGender = () => {
     getTitleNameByCode();
   }, []);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     try {
+      e.preventDefault();
       const response = await fetch(
         `http://localhost:8080/admin/gender/${code}`,
         {
@@ -43,6 +44,12 @@ export const EditGender = () => {
           body: JSON.stringify(edit),
         }
       );
+      if (response.status === 200) {
+        alert("User edit successfully");
+        navagate("/admin/home/gender");
+      } else {
+        alert("User edit error");
+      }
       const data = await response.json();
       console.log(data);
     } catch (error) {

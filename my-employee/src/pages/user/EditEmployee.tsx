@@ -30,6 +30,7 @@ export const EditEmployee = () => {
   const [genderList, setGenderList] = useState<Gender[]>([]);
   const [departmentList, setDepartmentList] = useState<Department[]>([]);
   const [positionList, setPositionList] = useState<Position[]>([]);
+  const [message, setMessage] = useState<string>("");
   const [file, setFile] = useState<File>();
   const { code } = useParams();
   const navagate = useNavigate();
@@ -85,9 +86,16 @@ export const EditEmployee = () => {
           headers: {},
           body: formImage,
         });
-        window.location.reload();
+
         const data = await response.json();
         console.log(data);
+        if (response.status === 200) {
+          alert("User upload image successfully");
+          navagate(`/profile/${code}`);
+          window.location.reload();
+        } else {
+          alert("User upload image error");
+        }
       } catch (error) {
         console.error(error);
       }
@@ -165,6 +173,7 @@ export const EditEmployee = () => {
                 onClick={() => {
                   deleteEmployee(code);
                   navagate(`/`);
+                  window.location.reload();
                 }}
               >
                 Delete Employee
@@ -219,6 +228,7 @@ export const EditEmployee = () => {
                   name="titleName"
                   value={formData.titleName}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
                 >
                   <option>{}</option>
                   {titleNameList.map((data) => (
@@ -240,6 +250,7 @@ export const EditEmployee = () => {
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="First name"
+                  required
                 />
               </div>
 
@@ -254,6 +265,7 @@ export const EditEmployee = () => {
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="last name"
+                  required
                 />
               </div>
             </div>
@@ -270,6 +282,7 @@ export const EditEmployee = () => {
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Nick name"
+                  required
                 />
               </div>
 
@@ -280,9 +293,9 @@ export const EditEmployee = () => {
                 <input
                   type="date"
                   name="birthday"
-                  // value={formData.birthday}
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
                 />
               </div>
 
@@ -295,6 +308,7 @@ export const EditEmployee = () => {
                   name="gender"
                   value={formData.gender}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
                 >
                   <option>{}</option>
                   {genderList.map((data) => (
@@ -316,6 +330,7 @@ export const EditEmployee = () => {
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Slack name"
+                  required
                 />
               </div>
 
@@ -330,6 +345,7 @@ export const EditEmployee = () => {
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Phone number"
+                  required
                 />
               </div>
 
@@ -344,6 +360,7 @@ export const EditEmployee = () => {
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Email"
+                  required
                 />
               </div>
 
@@ -356,6 +373,7 @@ export const EditEmployee = () => {
                   name="startDate"
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
                 />
               </div>
 
@@ -380,6 +398,7 @@ export const EditEmployee = () => {
                   name="department"
                   value={formData.department}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
                 >
                   <option>{}</option>
                   {departmentList.map((data) => (
@@ -399,6 +418,7 @@ export const EditEmployee = () => {
                   name="position"
                   value={formData.position}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
                 >
                   <option>{}</option>
                   {positionList.map((data) => (
@@ -417,7 +437,6 @@ export const EditEmployee = () => {
                   type="submit"
                   onClick={() => {
                     fileSubmit();
-                    // navagate(`/profile/${code}`);
                   }}
                 >
                   Submit

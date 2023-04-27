@@ -33,8 +33,9 @@ export const EditPosition = () => {
     getPositionByCode();
   }, []);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     try {
+      e.preventDefault();
       const response = await fetch(
         `http://localhost:8080/admin/position/${code}`,
         {
@@ -45,6 +46,12 @@ export const EditPosition = () => {
           body: JSON.stringify(edit),
         }
       );
+      if (response.status === 200) {
+        alert("User edit successfully");
+        navagate("/admin/home/position");
+      } else {
+        alert("User edit error");
+      }
       const data = await response.json();
       console.log(data);
     } catch (error) {

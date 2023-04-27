@@ -17,8 +17,9 @@ export const CreateTitleName = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     try {
+      e.preventDefault();
       const response = await fetch("http://localhost:8080/admin/title", {
         method: "POST",
         headers: {
@@ -26,6 +27,12 @@ export const CreateTitleName = () => {
         },
         body: JSON.stringify(formData),
       });
+      if (response.status === 200) {
+        alert("User create successfully");
+        navagate("/admin/home/title");
+      } else {
+        alert("User create error");
+      }
       const data = await response.json();
       console.log(data);
     } catch (error) {
@@ -65,6 +72,7 @@ export const CreateTitleName = () => {
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Title name"
+                  required
                 />
               </div>
             </div>

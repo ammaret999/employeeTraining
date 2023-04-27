@@ -17,8 +17,9 @@ export const CreateLevel = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     try {
+      e.preventDefault();
       const response = await fetch("http://localhost:8080/admin/level", {
         method: "POST",
         headers: {
@@ -26,6 +27,12 @@ export const CreateLevel = () => {
         },
         body: JSON.stringify(formData),
       });
+      if (response.status === 200) {
+        alert("User create successfully");
+        navagate("/admin/home/level");
+      } else {
+        alert("User create error");
+      }
       const data = await response.json();
       console.log(data);
     } catch (error) {
