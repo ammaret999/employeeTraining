@@ -47,8 +47,9 @@ export const CreateEmployee = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     try {
+      e.preventDefault();
       const response = await fetch("http://localhost:8080/employee", {
         method: "POST",
         headers: {
@@ -56,6 +57,12 @@ export const CreateEmployee = () => {
         },
         body: JSON.stringify(formData),
       });
+      if (response.status === 200) {
+        alert("User create successfully");
+        navagate("/");
+      } else {
+        alert("User create error");
+      }
       const data = await response.json();
       console.log(data);
     } catch (error) {

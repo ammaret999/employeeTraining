@@ -3,6 +3,7 @@ import { NavbarUser } from "../../components";
 import {
   Department,
   EmployeeEdit,
+  EmployeeTest,
   Gender,
   Position,
   TitleName,
@@ -10,28 +11,46 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 
 export const EditEmployee = () => {
-  const [formData, setFormData] = useState<EmployeeEdit>({
-    titleName: 0,
+  const [formData, setFormData] = useState<EmployeeTest>({
+    titleName: {
+      id: 0,
+      code: "",
+      titleName: "",
+    },
     firstName: "",
     lastName: "",
     nickName: "",
     birthday: new Date(),
-    gender: 0,
+    gender: {
+      id: 0,
+      code: "",
+      gender: "",
+    },
     slackName: "",
     phoneNumber: 0,
     email: "",
     startDate: new Date(),
     endDate: new Date(),
-    department: 0,
-    position: 0,
+    department: {
+      id: 0,
+      code: "",
+      department: "",
+    },
+    position: {
+      id: 0,
+      code: "",
+      position: "",
+      salaryMin: 0,
+      salaryMax: 0,
+    },
   });
 
   const [titleNameList, setTitleNameList] = useState<TitleName[]>([]);
   const [genderList, setGenderList] = useState<Gender[]>([]);
   const [departmentList, setDepartmentList] = useState<Department[]>([]);
   const [positionList, setPositionList] = useState<Position[]>([]);
-  const [message, setMessage] = useState<string>("");
   const [file, setFile] = useState<File>();
+  const defaultValue = new Date(formData.birthday).toLocaleDateString();
   const { code } = useParams();
   const navagate = useNavigate();
 
@@ -142,7 +161,7 @@ export const EditEmployee = () => {
       });
   };
 
-  function deleteEmployee(code: any) {
+  function deleteEmployee() {
     fetch(`http://localhost:8080/employee/${code}`, {
       method: "DELETE",
     }).then((result) => {
@@ -171,9 +190,7 @@ export const EditEmployee = () => {
                 className="btn"
                 type="submit"
                 onClick={() => {
-                  deleteEmployee(code);
-                  navagate(`/`);
-                  window.location.reload();
+                  deleteEmployee();
                 }}
               >
                 Delete Employee
@@ -226,7 +243,7 @@ export const EditEmployee = () => {
                 <select
                   onChange={handleSelectChange}
                   name="titleName"
-                  value={formData.titleName}
+                  value={formData.titleName.id}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                 >
@@ -293,9 +310,14 @@ export const EditEmployee = () => {
                 <input
                   type="date"
                   name="birthday"
+                  value={
+                    formData.birthday instanceof Date
+                      ? formData.birthday.toISOString()
+                      : formData.birthday
+                  }
+                  datatype="yyyy-MM-dd"
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required
                 />
               </div>
 
@@ -306,7 +328,7 @@ export const EditEmployee = () => {
                 <select
                   onChange={handleSelectChange}
                   name="gender"
-                  value={formData.gender}
+                  value={formData.gender.id}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                 >
@@ -371,9 +393,14 @@ export const EditEmployee = () => {
                 <input
                   type="date"
                   name="startDate"
+                  value={
+                    formData.startDate instanceof Date
+                      ? formData.startDate.toISOString()
+                      : formData.startDate
+                  }
+                  datatype="yyyy-MM-dd"
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required
                 />
               </div>
 
@@ -384,6 +411,12 @@ export const EditEmployee = () => {
                 <input
                   type="date"
                   name="endDate"
+                  value={
+                    formData.endDate instanceof Date
+                      ? formData.endDate.toISOString()
+                      : formData.endDate
+                  }
+                  datatype="yyyy-MM-dd"
                   onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
@@ -396,9 +429,8 @@ export const EditEmployee = () => {
                 <select
                   onChange={handleSelectChange}
                   name="department"
-                  value={formData.department}
+                  value={formData.department.id}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required
                 >
                   <option>{}</option>
                   {departmentList.map((data) => (
@@ -416,7 +448,7 @@ export const EditEmployee = () => {
                 <select
                   onChange={handleSelectChange}
                   name="position"
-                  value={formData.position}
+                  value={formData.position.id}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                 >
