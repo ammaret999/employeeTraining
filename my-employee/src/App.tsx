@@ -40,17 +40,14 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/employee" element={<CreateEmployee />} />
       <Route path="/search" element={<Search />} />
-
       <Route path="/profile/edit/:code" element={<EditEmployee />} />
       <Route path="/profile/:code" element={<Profile />} />
-
       <Route path="/work_history" element={<CreateWorkHistory />} />
       <Route path="/work_history/edit" element={<EditWorkHistory />} />
       <Route path="/certificate" element={<CreateCertificate />} />
       <Route path="/certificate/edit" element={<EditCertificate />} />
       <Route path="/education" element={<CreateEducation />} />
       <Route path="/education/edit" element={<EditEducation />} />
-
       <Route path="/admin/login" element={<LoginAdmin />} />
       <Route path="/admin/home" element={<HomeAdmin />} />
       <Route path="/admin/home/level" element={<LevelPage />} />
@@ -83,6 +80,23 @@ function App() {
         path="/admin/home/position/edit/:code"
         element={<EditPosition />}
       />
+      <Route
+        path="/profile/certificate/:code"
+        element={<CreateCertificate />}
+      />
+      <Route
+        path="/profile/certificate/edit/:code"
+        element={<EditCertificate />}
+      />
+
+      <Route path="/profile/work/:code" element={<CreateWorkHistory />} />
+      <Route path="/profile/work/edit/:code" element={<EditWorkHistory />} />
+
+      <Route
+        path="/profile/education/:code"
+        element={<CreateEducation />}
+      />
+      <Route path="/profile/education/edit/:code" element={<EditEducation />} />
     </Routes>
   );
 }

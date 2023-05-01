@@ -1,6 +1,83 @@
+import { useNavigate, useParams } from "react-router-dom";
 import { NavbarUser } from "../../components";
+import { EducationEdit, Level } from "../../types";
+import { useEffect, useState } from "react";
 
 export const EditEducation = () => {
+  const [formData, setFormData] = useState<EducationEdit>({
+    levelId: 0,
+    institution: "",
+    description: "",
+  });
+  const [level, setLevel] = useState<Level[]>([]);
+
+  const navagate = useNavigate();
+  const { code } = useParams();
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const getEducationByCode = () => {
+    fetch(`http://localhost:8080/education/${code}`)
+      .then((res) => res.json())
+      .then((res) => {
+        Object.keys(res).map((key) => {
+          const isHaveId = ["levelId"].includes(key);
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            [key]: isHaveId ? res[key].id : res[key],
+          }));
+        });
+      });
+  };
+
+  const getLevel = () => {
+    fetch(`http://localhost:8080/admin/level`)
+      .then((res) => res.json())
+      .then((res) => {
+        setLevel(res);
+      });
+  };
+
+  useEffect(() => {
+    getEducationByCode();
+    getLevel();
+  }, []);
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    try {
+      e.preventDefault();
+      const response = await fetch(`http://localhost:8080/education/${code}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.status === 200) {
+        alert("User edit successfully");
+        navagate(-1);
+      } else {
+        alert("User edit error");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <NavbarUser />
@@ -12,21 +89,25 @@ export const EditEducation = () => {
             <p className="text-2xl">Edit Education</p>
           </div>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="grid gap-6 mb-6 grid-cols-2 m-4">
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Level
                 </label>
                 <select
+                  name="levelId"
+                  value={formData.levelId}
+                  onChange={handleSelectChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="First name"
+                  required
                 >
-                  <option value=""></option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+                  <option>{}</option>
+                  {level.map((data) => (
+                    <option key={data.id} value={data.id}>
+                      {data.level}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -36,9 +117,11 @@ export const EditEducation = () => {
                 </label>
                 <input
                   type="text"
-                  id="Pnumber"
+                  name="institution"
+                  value={formData.institution}
+                  onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Certificate"
+                  placeholder="Institution"
                   required
                 />
               </div>
@@ -49,23 +132,28 @@ export const EditEducation = () => {
                 </label>
                 <input
                   type="text"
-                  id="email"
+                  name="description"
+                  onChange={handleInputChange}
+                  value={formData.description}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Discription"
-                  required
                 />
               </div>
             </div>
-          </form>
 
-          <div className="grid grid-cols-12 gap-4 mb-3">
-            <div className="col-span-6 justify-items-end grid">
-              <button className="btn">Submit</button>
+            <div className="grid grid-cols-12 gap-4 mb-3">
+              <div className="col-span-6 justify-items-end grid">
+                <button className="btn" type="submit">
+                  Submit
+                </button>
+              </div>
+              <div className="col-span-6 justify-items-start grid">
+                <button className="btn" onClick={() => navagate(-1)}>
+                  Cancle
+                </button>
+              </div>
             </div>
-            <div className="col-span-6 justify-items-start grid">
-              <button className="btn">Cancle</button>
-            </div>
-          </div>
+          </form>
         </div>
 
         <div className="col-span-2"></div>

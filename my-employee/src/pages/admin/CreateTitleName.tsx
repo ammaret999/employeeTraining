@@ -29,12 +29,10 @@ export const CreateTitleName = () => {
       });
       if (response.status === 200) {
         alert("User create successfully");
-        navagate("/admin/home/title");
+        navagate("/admin/home/title_name");
       } else {
         alert("User create error");
       }
-      const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error(error);
     }

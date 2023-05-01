@@ -1,6 +1,47 @@
+import { useState } from "react";
 import { NavbarUser } from "../../components";
+import { WorkHistoryCreate } from "../../types/workHistory";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const CreateWorkHistory = () => {
+  const [formData, setFormData] = useState<WorkHistoryCreate>({
+    companyName: "",
+    startWork: new Date(),
+    endWork: new Date(),
+    description: "",
+  });
+  const navagate = useNavigate();
+  const { code } = useParams();
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    try {
+      e.preventDefault();
+      const response = await fetch(`http://localhost:8080/work/${code}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.status === 200) {
+        alert("User create successfully");
+        navagate(`/profile/${code}`);
+      } else {
+        alert("User create error");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <NavbarUser />
@@ -12,7 +53,7 @@ export const CreateWorkHistory = () => {
             <p className="text-2xl">Create Work History</p>
           </div>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="grid gap-6 mb-6 grid-cols-2 m-4">
               <div>
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -20,7 +61,9 @@ export const CreateWorkHistory = () => {
                 </label>
                 <input
                   type="text"
-                  id="Pnumber"
+                  name="companyName"
+                  value={formData.companyName}
+                  onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Company"
                   required
@@ -33,7 +76,13 @@ export const CreateWorkHistory = () => {
                 </label>
                 <input
                   type="date"
-                  id="sdate"
+                  name="startWork"
+                  value={
+                    formData.startWork instanceof Date
+                      ? formData.startWork.toISOString()
+                      : formData.startWork
+                  }
+                  onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="StartDate"
                   required
@@ -46,7 +95,13 @@ export const CreateWorkHistory = () => {
                 </label>
                 <input
                   type="date"
-                  id="sdate"
+                  name="endWork"
+                  value={
+                    formData.endWork instanceof Date
+                      ? formData.endWork.toISOString()
+                      : formData.endWork
+                  }
+                  onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="StartDate"
                   required
@@ -59,23 +114,32 @@ export const CreateWorkHistory = () => {
                 </label>
                 <input
                   type="text"
-                  id="email"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Discription"
                   required
                 />
               </div>
             </div>
-          </form>
 
-          <div className="grid grid-cols-12 gap-4 mb-3">
-            <div className="col-span-6 justify-items-end grid">
-              <button className="btn">Submit</button>
+            <div className="grid grid-cols-12 gap-4 mb-3">
+              <div className="col-span-6 justify-items-end grid">
+                <button className="btn" type="submit">
+                  Submit
+                </button>
+              </div>
+              <div className="col-span-6 justify-items-start grid">
+                <button
+                  className="btn"
+                  onClick={() => navagate(`/profile/${code}`)}
+                >
+                  Cancle
+                </button>
+              </div>
             </div>
-            <div className="col-span-6 justify-items-start grid">
-              <button className="btn">Cancle</button>
-            </div>
-          </div>
+          </form>
         </div>
 
         <div className="col-span-2"></div>

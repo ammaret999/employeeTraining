@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { NavbarUser, HomeUserCard } from "../../components";
 import { getEmployee } from "../../services/homeUser";
 import { Employee } from "../../types";
-import { useNavigate, useParams } from "react-router-dom";
 
 export const Home = () => {
   const [employee, setEmployee] = useState<Employee[]>([]);

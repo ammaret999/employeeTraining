@@ -3,7 +3,6 @@ import { NavbarUser } from "../../components";
 import {
   Department,
   EmployeeEdit,
-  EmployeeTest,
   Gender,
   Position,
   TitleName,
@@ -11,38 +10,20 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 
 export const EditEmployee = () => {
-  const [formData, setFormData] = useState<EmployeeTest>({
-    titleName: {
-      id: 0,
-      code: "",
-      titleName: "",
-    },
+  const [formData, setFormData] = useState<EmployeeEdit>({
+    titleName: 0,
     firstName: "",
     lastName: "",
     nickName: "",
     birthday: new Date(),
-    gender: {
-      id: 0,
-      code: "",
-      gender: "",
-    },
+    gender: 0,
     slackName: "",
     phoneNumber: 0,
     email: "",
     startDate: new Date(),
     endDate: new Date(),
-    department: {
-      id: 0,
-      code: "",
-      department: "",
-    },
-    position: {
-      id: 0,
-      code: "",
-      position: "",
-      salaryMin: 0,
-      salaryMax: 0,
-    },
+    department: 0,
+    position: 0,
   });
 
   const [titleNameList, setTitleNameList] = useState<TitleName[]>([]);
@@ -53,73 +34,6 @@ export const EditEmployee = () => {
   const defaultValue = new Date(formData.birthday).toLocaleDateString();
   const { code } = useParams();
   const navagate = useNavigate();
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-    console.log(formData);
-  };
-
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-    console.log(formData);
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-    setFile(selectedFile);
-    console.log(selectedFile?.name);
-  };
-
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch(`http://localhost:8080/employee/${code}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const fileSubmit = async () => {
-    if (file) {
-      try {
-        const formImage = new FormData();
-        formImage.append("file", file);
-        console.log(formImage);
-        const response = await fetch(`http://localhost:8080/upload/${code}`, {
-          method: "POST",
-          headers: {},
-          body: formImage,
-        });
-
-        const data = await response.json();
-        console.log(data);
-        if (response.status === 200) {
-          alert("User upload image successfully");
-          navagate(`/profile/${code}`);
-          window.location.reload();
-        } else {
-          alert("User upload image error");
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
 
   const getTitleName = () => {
     fetch(`http://localhost:8080/admin/title`)
@@ -157,7 +71,18 @@ export const EditEmployee = () => {
     fetch(`http://localhost:8080/employee/${code}`)
       .then((res) => res.json())
       .then((res) => {
-        setFormData(res);
+        Object.keys(res).map((key) => {
+          const isHaveId = [
+            "department",
+            "gender",
+            "position",
+            "titleName",
+          ].includes(key);
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            [key]: isHaveId ? res[key].id : res[key],
+          }));
+        });
       });
   };
 
@@ -176,6 +101,77 @@ export const EditEmployee = () => {
     getTitlePosition();
     getEmployeeByCode();
   }, []);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    setFile(selectedFile);
+    console.log(selectedFile?.name);
+  };
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    try {
+      e.preventDefault();
+      const response = await fetch(`http://localhost:8080/employee/${code}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.status === 200) {
+        alert("User edit successfully");
+        navagate(-1);
+      } else {
+        alert("User edit error");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fileSubmit = async () => {
+    if (file) {
+      try {
+        const formImage = new FormData();
+        formImage.append("file", file);
+        console.log(formImage);
+        const response = await fetch(`http://localhost:8080/upload/${code}`, {
+          method: "POST",
+          headers: {},
+          body: formImage,
+        });
+
+        const data = await response.json();
+        console.log(data);
+        if (response.status === 200) {
+          alert("User upload image successfully");
+          navagate(`/profile/${code}`);
+          window.location.reload();
+        } else {
+          alert("User upload image error");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+  console.log(formData);
 
   return (
     <>
@@ -243,7 +239,7 @@ export const EditEmployee = () => {
                 <select
                   onChange={handleSelectChange}
                   name="titleName"
-                  value={formData.titleName.id}
+                  value={formData.titleName}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                 >
@@ -328,7 +324,7 @@ export const EditEmployee = () => {
                 <select
                   onChange={handleSelectChange}
                   name="gender"
-                  value={formData.gender.id}
+                  value={formData.gender}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                 >
@@ -429,7 +425,7 @@ export const EditEmployee = () => {
                 <select
                   onChange={handleSelectChange}
                   name="department"
-                  value={formData.department.id}
+                  value={formData.department}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                   <option>{}</option>
@@ -448,7 +444,7 @@ export const EditEmployee = () => {
                 <select
                   onChange={handleSelectChange}
                   name="position"
-                  value={formData.position.id}
+                  value={formData.position}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                 >

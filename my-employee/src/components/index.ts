@@ -6,3 +6,6 @@ export * from "./HomeUserCard";
 export * from "./LevelCard";
 export * from "./NavbarUser";
 export * from "./TitleNameCard";
+export * from "./CertificateCard"
+export * from "./WorkHistoryCard"
+export * from "./EducationHistoryCard"
