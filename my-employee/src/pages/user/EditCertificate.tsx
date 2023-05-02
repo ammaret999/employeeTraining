@@ -5,6 +5,10 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export const EditCertificate = () => {
   const [edit, setEdit] = useState<CertificateEdit>({
+    employeeId: {
+      id: 0,
+      code: "",
+    },
     topic: "",
     description: "",
     code: "",
@@ -106,7 +110,12 @@ export const EditCertificate = () => {
                 </button>
               </div>
               <div className="col-span-6 justify-items-start grid">
-                <button className="btn">Cancle</button>
+                <button
+                  className="btn"
+                  onClick={() => navagate(`/profile/${edit.employeeId.code}`)}
+                >
+                  Cancle
+                </button>
               </div>
             </div>
           </form>

@@ -15,6 +15,10 @@ export interface WorkHistoryCreate {
 }
 
 export interface WorkHistoryEdit {
+    employeeId : {
+        id : number,
+        code : string,
+    };
     code: string;
     companyName: string;
     startWork: Date;

@@ -50,8 +50,6 @@ export const EditGender = () => {
       } else {
         alert("User edit error");
       }
-      const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error(error);
     }

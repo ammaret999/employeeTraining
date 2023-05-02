@@ -6,6 +6,10 @@ import { useNavigate, useParams } from "react-router-dom";
 export const EditWorkHistory = () => {
   const [edit, setEdit] = useState<WorkHistoryEdit>({
     code: "",
+    employeeId: {
+      id: 0,
+      code: "",
+    },
     companyName: "",
     startWork: new Date(),
     endWork: new Date(),
@@ -142,7 +146,10 @@ export const EditWorkHistory = () => {
                 </button>
               </div>
               <div className="col-span-6 justify-items-start grid">
-                <button className="btn" onClick={() => navagate(-1)}>
+                <button
+                  className="btn"
+                  onClick={() => navagate(`/profile/${edit.employeeId.code}`)}
+                >
                   Cancle
                 </button>
               </div>

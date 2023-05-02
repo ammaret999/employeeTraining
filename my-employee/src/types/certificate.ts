@@ -11,6 +11,10 @@ export interface CertificateCreate {
 }
 
 export interface CertificateEdit {
+   employeeId : {
+        id : number,
+        code : string,
+    };
    code: string;
    topic: string;
    description: string;

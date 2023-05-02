@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 
 export const EditEducation = () => {
   const [formData, setFormData] = useState<EducationEdit>({
+    employeeId: {
+      id: 0,
+      code: "",
+    },
     levelId: 0,
     institution: "",
     description: "",
@@ -148,7 +152,12 @@ export const EditEducation = () => {
                 </button>
               </div>
               <div className="col-span-6 justify-items-start grid">
-                <button className="btn" onClick={() => navagate(-1)}>
+                <button
+                  className="btn"
+                  onClick={() =>
+                    navagate(`/profile/${formData.employeeId.code}`)
+                  }
+                >
                   Cancle
                 </button>
               </div>

@@ -17,6 +17,10 @@ export interface EducationCreate {
 }
 
 export interface EducationEdit {
+    employeeId : {
+        id : number,
+        code : string,
+    };
     levelId: number;
     institution:string;
     description: string;
