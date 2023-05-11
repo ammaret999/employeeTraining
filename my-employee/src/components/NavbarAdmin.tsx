@@ -17,7 +17,9 @@ export const NavbarAdmin: React.FC = () => {
         <div className="flex-none gap-2">
           <div className="dropdown dropdown-end">
             <div className="dropdown dropdown-end">
-              <div className="btn">Logout</div>
+              <a className="btn" href="http://localhost:8080/logout">
+                Logout
+              </a>
             </div>
           </div>
         </div>

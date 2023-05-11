@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { NavbarUser } from "../../components";
+import { CheckLogin, NavbarUser } from "../../components";
 import {
   Department,
   EmployeeEdit,
@@ -36,7 +36,11 @@ export const EditEmployee = () => {
   const navagate = useNavigate();
 
   const getTitleName = () => {
-    fetch(`http://localhost:8080/admin/title`)
+    fetch(`http://localhost:8080/admin/title`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setTitleNameList(res);
@@ -44,7 +48,11 @@ export const EditEmployee = () => {
   };
 
   const getTitleGender = () => {
-    fetch(`http://localhost:8080/admin/gender`)
+    fetch(`http://localhost:8080/admin/gender`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setGenderList(res);
@@ -52,7 +60,11 @@ export const EditEmployee = () => {
   };
 
   const getTitleDepartment = () => {
-    fetch(`http://localhost:8080/admin/department`)
+    fetch(`http://localhost:8080/admin/department`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setDepartmentList(res);
@@ -60,7 +72,11 @@ export const EditEmployee = () => {
   };
 
   const getTitlePosition = () => {
-    fetch(`http://localhost:8080/admin/position`)
+    fetch(`http://localhost:8080/admin/position`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setPositionList(res);
@@ -68,7 +84,11 @@ export const EditEmployee = () => {
   };
 
   const getEmployeeByCode = () => {
-    fetch(`http://localhost:8080/employee/${code}`)
+    fetch(`http://localhost:8080/employee/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         Object.keys(res).map((key) => {
@@ -89,9 +109,14 @@ export const EditEmployee = () => {
   function deleteEmployee() {
     fetch(`http://localhost:8080/employee/${code}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
     }).then((result) => {
       result.json();
     });
+    navagate(`/`);
+    window.location.reload();
   }
 
   useEffect(() => {
@@ -131,6 +156,7 @@ export const EditEmployee = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
         },
         body: JSON.stringify(formData),
       });
@@ -153,7 +179,9 @@ export const EditEmployee = () => {
         console.log(formImage);
         const response = await fetch(`http://localhost:8080/upload/${code}`, {
           method: "POST",
-          headers: {},
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+          },
           body: formImage,
         });
 
@@ -175,6 +203,7 @@ export const EditEmployee = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarUser />
 
       <div className="grid grid-cols-12 gap-4">

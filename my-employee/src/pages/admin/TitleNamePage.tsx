@@ -4,6 +4,7 @@ import { TitleName } from "../../types/titleName";
 import { useEffect, useState } from "react";
 import { getTitleName } from "../../services/titleName";
 import { useNavigate } from "react-router-dom";
+import { CheckLogin } from "../../components";
 export const TitleNamePage = () => {
   const [titleName, setTitleName] = useState<TitleName[]>([]);
   const navagate = useNavigate();
@@ -14,6 +15,7 @@ export const TitleNamePage = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

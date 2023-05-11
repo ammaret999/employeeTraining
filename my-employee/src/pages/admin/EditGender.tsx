@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavbarAdmin } from "../../components/NavbarAdmin";
 import { GenderEdit } from "../../types";
 import { useNavigate, useParams } from "react-router-dom";
+import { CheckLogin } from "../../components";
 
 export const EditGender = () => {
   const [edit, setEdit] = useState<GenderEdit>({
@@ -20,7 +21,11 @@ export const EditGender = () => {
   };
 
   const getTitleNameByCode = () => {
-    fetch(`http://localhost:8080/admin/gender/${code}`)
+    fetch(`http://localhost:8080/admin/gender/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setEdit(res);
@@ -40,6 +45,7 @@ export const EditGender = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
           },
           body: JSON.stringify(edit),
         }
@@ -57,6 +63,7 @@ export const EditGender = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

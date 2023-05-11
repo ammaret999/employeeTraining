@@ -15,6 +15,9 @@ export const TitleNameCard: React.FC<TitleNameCardProps> = ({
   function deleteTitleName(code: string) {
     fetch(`http://localhost:8080/admin/title/${code}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
     }).then((result) => {
       result.json();
     });

@@ -4,6 +4,7 @@ import { Gender } from "../../types/gender";
 import { getGender } from "../../services";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CheckLogin } from "../../components";
 
 export const GenderPage = () => {
   const [gender, setgender] = useState<Gender[]>([]);
@@ -15,6 +16,7 @@ export const GenderPage = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

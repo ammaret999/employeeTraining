@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { NavbarAdmin } from "../../components/NavbarAdmin";
 import { useState } from "react";
 import { LevelCreate } from "../../types";
+import { CheckLogin } from "../../components";
 
 export const CreateLevel = () => {
   const [formData, setFormData] = useState<LevelCreate>({
@@ -24,6 +25,7 @@ export const CreateLevel = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
         },
         body: JSON.stringify(formData),
       });
@@ -41,6 +43,7 @@ export const CreateLevel = () => {
   };
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

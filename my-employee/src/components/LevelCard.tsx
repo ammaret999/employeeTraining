@@ -10,6 +10,9 @@ export const LevelCard: React.FC<LevelCardProps> = ({ code, level }) => {
   function deleteLevel(code: string) {
     fetch(`http://localhost:8080/admin/level/${code}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
     }).then((result) => {
       result.json();
     });

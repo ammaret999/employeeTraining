@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavbarAdmin } from "../../components/NavbarAdmin";
 import { GenderCreate } from "../../types";
 import { useNavigate } from "react-router-dom";
+import { CheckLogin } from "../../components";
 
 export const CreateGender = () => {
   const [formData, setFormData] = useState<GenderCreate>({
@@ -24,6 +25,7 @@ export const CreateGender = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
         },
         body: JSON.stringify(formData),
       });
@@ -41,6 +43,7 @@ export const CreateGender = () => {
   };
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

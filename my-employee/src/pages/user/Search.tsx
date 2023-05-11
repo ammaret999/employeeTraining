@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HomeUserCard, NavbarUser } from "../../components";
+import { CheckLogin, HomeUserCard, NavbarUser } from "../../components";
 import { Employee } from "../../types";
 import { getSearchEmployee } from "../../services";
 export const Search = () => {
@@ -20,6 +20,7 @@ export const Search = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarUser />
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-12 gap-4 mb-3">

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { NavbarUser, HomeUserCard } from "../../components";
+import { NavbarUser, HomeUserCard, CheckLogin } from "../../components";
 import { getEmployee } from "../../services/homeUser";
 import { Employee } from "../../types";
+import { useParams } from "react-router-dom";
+import { getToken } from "../../services/token";
+import queryString from "query-string";
 
 export const Home = () => {
   const [employee, setEmployee] = useState<Employee[]>([]);
@@ -12,6 +15,7 @@ export const Home = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarUser />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

@@ -1,17 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  CheckLogin,
   EducationHistoryCard,
   NavbarUser,
   WorkHistoryCard,
 } from "../../components";
-import { getUserById } from "../../services";
-import {
-  Certificate,
-  CertificateCreate,
-  Employee,
-  ImageBase64,
-  Education,
-} from "../../types";
+import { Certificate, Employee, ImageBase64, Education } from "../../types";
 import { useNavigate, useParams } from "react-router-dom";
 import { CertificateCard } from "../../components/CertificateCard";
 import { WorkHistory } from "../../types/workHistory";
@@ -26,7 +20,11 @@ export const Profile = () => {
   const { code } = useParams();
 
   const getEmployeeByCode = () => {
-    fetch(`http://localhost:8080/employee/${code}`)
+    fetch(`http://localhost:8080/employee/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setEmployee(res);
@@ -34,25 +32,41 @@ export const Profile = () => {
   };
 
   const getImage = () => {
-    fetch(`http://localhost:8080/file/${code}`)
+    fetch(`http://localhost:8080/file/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((Response) => Response.json())
       .then((imageBase64) => setImageBase64(imageBase64));
   };
 
   const getCertificate = () => {
-    fetch(`http://localhost:8080/certificate/employee/${code}`)
+    fetch(`http://localhost:8080/certificate/employee/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data: Certificate[]) => setCertificate(data));
   };
 
   const getWorkHistory = () => {
-    fetch(`http://localhost:8080/work/employee/${code}`)
+    fetch(`http://localhost:8080/work/employee/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data: WorkHistory[]) => setworkHistory(data));
   };
 
   const getEducation = () => {
-    fetch(`http://localhost:8080/education/employee/${code}`)
+    fetch(`http://localhost:8080/education/employee/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data: Education[]) => setEducation(data));
   };
@@ -74,6 +88,7 @@ export const Profile = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarUser />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>
@@ -93,11 +108,9 @@ export const Profile = () => {
               </button>
             </div>
           </div>
-
           <div className="flex justify-center mt-5">
             <p className="text-2xl">Profile</p>
           </div>
-
           <div className="grid justify-center m-5">
             <img
               className="object-fill h-80 w-80 object-center bg-black "
@@ -105,7 +118,6 @@ export const Profile = () => {
               alt="image"
             />
           </div>
-
           <div className="grid justify-center">
             <div className="grid gap-6 mb-6 md:grid-cols-2 m-4">
               {employee &&
@@ -122,40 +134,6 @@ export const Profile = () => {
                 })}
             </div>
           </div>
-
-          {/* <div className="grid grid-cols-3">
-            <div className="grid justify-center text-xl">Work History</div>
-            <div className="grid justify-center text-xl">Certificate</div>
-            <div className="grid justify-center text-xl">Education History</div>
-          </div>
-
-          <div className="grid grid-cols-3 mb-5 mt-5">
-            <div className="grid justify-center">1</div>
-            <div className="grid justify-center">
-              {certificate.map((data) => (
-                <CertificateCard {...data} key={data.id} />
-              ))}
-            </div>
-            <div className="grid justify-center">3</div>
-          </div>
-
-          <div className="grid grid-cols-3">
-            <div className="grid justify-center">
-              <button className="btn">+</button>
-            </div>
-            <div className="grid justify-center">
-              <button
-                className="btn"
-                onClick={() => navagate("/profile/certificate")}
-              >
-                +
-              </button>
-            </div>
-            <div className="grid justify-center">
-              <button className="btn">+</button>
-            </div>
-          </div> */}
-
           <div className="grid grid-cols-3">
             <div>
               <div className="grid justify-center text-xl">Work History</div>

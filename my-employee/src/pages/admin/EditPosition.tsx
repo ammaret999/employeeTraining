@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavbarAdmin } from "../../components/NavbarAdmin";
 import { PositionEdit } from "../../types";
 import { useNavigate, useParams } from "react-router-dom";
+import { CheckLogin } from "../../components";
 
 export const EditPosition = () => {
   const [edit, setEdit] = useState<PositionEdit>({
@@ -22,7 +23,11 @@ export const EditPosition = () => {
   };
 
   const getPositionByCode = () => {
-    fetch(`http://localhost:8080/admin/position/${code}`)
+    fetch(`http://localhost:8080/admin/position/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setEdit(res);
@@ -42,6 +47,7 @@ export const EditPosition = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
           },
           body: JSON.stringify(edit),
         }
@@ -61,6 +67,7 @@ export const EditPosition = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

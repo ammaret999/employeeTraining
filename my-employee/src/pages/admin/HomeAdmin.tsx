@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { NavbarAdmin } from "../../components";
+import { CheckLogin, NavbarAdmin } from "../../components";
 export const HomeAdmin = () => {
   const navagate = useNavigate();
 
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

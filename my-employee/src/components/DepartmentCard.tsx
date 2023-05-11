@@ -14,6 +14,9 @@ export const DepartmentCard: React.FC<DepartmentCardProps> = ({
   function deleteDepartment(code: string) {
     fetch(`http://localhost:8080/admin/department/${code}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
     }).then((result) => {
       result.json();
     });

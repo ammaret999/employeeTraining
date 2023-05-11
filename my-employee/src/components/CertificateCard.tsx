@@ -17,6 +17,9 @@ export const CertificateCard: React.FC<CertificateCardProps> = ({
   function deleteCertificate(code: string) {
     fetch(`http://localhost:8080/certificate/${code}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
     }).then((result) => {
       result.json();
     });

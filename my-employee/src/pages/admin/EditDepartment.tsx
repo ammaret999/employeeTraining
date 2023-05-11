@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavbarAdmin } from "../../components/NavbarAdmin";
 import { DepartmentEdit } from "../../types";
 import { useNavigate, useParams } from "react-router-dom";
+import { CheckLogin } from "../../components";
 
 export const EditDepartment = () => {
   const [edit, setEdit] = useState<DepartmentEdit>({
@@ -20,7 +21,11 @@ export const EditDepartment = () => {
   };
 
   const getDepartmentByCode = () => {
-    fetch(`http://localhost:8080/admin/department/${code}`)
+    fetch(`http://localhost:8080/admin/department/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setEdit(res);
@@ -40,6 +45,7 @@ export const EditDepartment = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
           },
           body: JSON.stringify(edit),
         }
@@ -58,6 +64,7 @@ export const EditDepartment = () => {
   };
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

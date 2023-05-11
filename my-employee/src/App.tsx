@@ -33,7 +33,35 @@ import {
   EditPosition,
 } from "./pages/admin";
 
+import { getToken } from "./services/token";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { CheckLogin } from "./components";
+
 function App() {
+  useEffect(() => {
+    // if (user) {
+    //   axios
+    //     .get(
+    //       `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+    //       {
+    //         headers: {
+    //           Authorization: `Bearer ${user.access_token}`,
+    //           Accept: "application/json",
+    //         },
+    //       }
+    //     )
+    //     .then((res) => {
+    //       setProfile(res.data);
+    //     })
+    //     .catch((err) => console.log(err));
+    // }
+    localStorage.removeItem("tokenHeader");
+    const token: string =
+      "eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc3NzBiMDg1YmY2NDliNzI2YjM1NzQ3NjQwMzBlMWJkZTlhMTBhZTYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3MDY5MTE5MDEyNzQtNHJpdTJjOGk0MDEwa3Y3amRudnVsZDhxb2FwZHM3aDEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI3MDY5MTE5MDEyNzQtNHJpdTJjOGk0MDEwa3Y3amRudnVsZDhxb2FwZHM3aDEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTU3ODY0NTU0MzEwMzEyMjE4NjMiLCJlbWFpbCI6ImFtYXJlZG9rNjAwQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoidUx2ekZWQlJsa0FyRnB5TldJekotQSIsIm5vbmNlIjoiLUdaaEU0TUFSQWs5MHVHclV4bjNBdDlFYlhWNk5KZWkxR1FCVUFtQmd2cyIsIm5hbWUiOiJNQU5HTyBLVU5HIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FHTm15eGJzY2IyRGFRSGppM2VGYUhXUktNNmZQVlR4ZjR0WGtPb09kTzRLPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6Ik1BTkdPIiwiZmFtaWx5X25hbWUiOiJLVU5HIiwibG9jYWxlIjoidGgiLCJpYXQiOjE2ODM3MzYxNzAsImV4cCI6MTY4MzczOTc3MH0.XtFzvCcBvlccAbCh4pzsq1b9YC6DclDmeW-mnMKb2us5oDbhFNtBCWPDusanLI-SagOL7jtwGsiikKGFPy0ual8GzHYQmSmQgmhqlhYnoqen_zdlmd6iWgEErfh1FCz2ffyfQ6p3qIdSbZO7qqCm1Vt9DeznbET1CFBjZDk93yTkg-lF1iDzodrAUGw_vCj0MnY8C8TvBsm8yHkWYx9uckCthJmV417D0nmUNuaiVZmWTAdx9sIylwfmNxcSpmXvk14Lx5vVgwjPqyaEz7qn_hmphXqHI4Ess5ee9pDr12yN5F8oCsnMQG-sPPR_rNtf0GPPGpZ30do5pyYhnt-u7Q";
+    localStorage.setItem("tokenHeader", token);
+  }, []);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -92,10 +120,7 @@ function App() {
       <Route path="/profile/work/:code" element={<CreateWorkHistory />} />
       <Route path="/profile/work/edit/:code" element={<EditWorkHistory />} />
 
-      <Route
-        path="/profile/education/:code"
-        element={<CreateEducation />}
-      />
+      <Route path="/profile/education/:code" element={<CreateEducation />} />
       <Route path="/profile/education/edit/:code" element={<EditEducation />} />
     </Routes>
   );

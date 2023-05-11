@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavbarAdmin } from "../../components";
+import { CheckLogin, NavbarAdmin } from "../../components";
 import { TitleNameCreate } from "../../types";
 import { useNavigate } from "react-router-dom";
 
@@ -24,6 +24,7 @@ export const CreateTitleName = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
         },
         body: JSON.stringify(formData),
       });
@@ -40,6 +41,7 @@ export const CreateTitleName = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

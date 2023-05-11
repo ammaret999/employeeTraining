@@ -1,5 +1,5 @@
 import { SetStateAction, useState } from "react";
-import { NavbarUser } from "../../components";
+import { CheckLogin, NavbarUser } from "../../components";
 import {
   Department,
   EmployeePost,
@@ -54,6 +54,7 @@ export const CreateEmployee = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
         },
         body: JSON.stringify(formData),
       });
@@ -71,7 +72,11 @@ export const CreateEmployee = () => {
   };
 
   const getTitleName = () => {
-    fetch(`http://localhost:8080/admin/title`)
+    fetch(`http://localhost:8080/admin/title`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setTitleNameList(res);
@@ -79,7 +84,11 @@ export const CreateEmployee = () => {
   };
 
   const getTitleGender = () => {
-    fetch(`http://localhost:8080/admin/gender`)
+    fetch(`http://localhost:8080/admin/gender`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setGenderList(res);
@@ -87,7 +96,11 @@ export const CreateEmployee = () => {
   };
 
   const getTitleDepartment = () => {
-    fetch(`http://localhost:8080/admin/department`)
+    fetch(`http://localhost:8080/admin/department`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setDepartmentList(res);
@@ -95,7 +108,11 @@ export const CreateEmployee = () => {
   };
 
   const getTitlePosition = () => {
-    fetch(`http://localhost:8080/admin/position`)
+    fetch(`http://localhost:8080/admin/position`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setPositionList(res);
@@ -111,6 +128,7 @@ export const CreateEmployee = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarUser />
 
       <div className="grid grid-cols-12 gap-4">

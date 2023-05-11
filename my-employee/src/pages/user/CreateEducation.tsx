@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavbarUser } from "../../components";
+import { CheckLogin, NavbarUser } from "../../components";
 import { EducationCreate, Level } from "../../types";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -38,6 +38,7 @@ export const CreateEducation = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
         },
         body: JSON.stringify(formData),
       });
@@ -52,7 +53,11 @@ export const CreateEducation = () => {
     }
   };
   const getLevel = () => {
-    fetch(`http://localhost:8080/admin/level`)
+    fetch(`http://localhost:8080/admin/level`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setLevel(res);
@@ -65,6 +70,7 @@ export const CreateEducation = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarUser />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { NavbarUser } from "../../components";
+import { CheckLogin, NavbarUser } from "../../components";
 import { EducationEdit, Level } from "../../types";
 import { useEffect, useState } from "react";
 
@@ -35,7 +35,11 @@ export const EditEducation = () => {
   };
 
   const getEducationByCode = () => {
-    fetch(`http://localhost:8080/education/${code}`)
+    fetch(`http://localhost:8080/education/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         Object.keys(res).map((key) => {
@@ -49,7 +53,11 @@ export const EditEducation = () => {
   };
 
   const getLevel = () => {
-    fetch(`http://localhost:8080/admin/level`)
+    fetch(`http://localhost:8080/admin/level`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setLevel(res);
@@ -68,6 +76,7 @@ export const EditEducation = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
         },
         body: JSON.stringify(formData),
       });
@@ -84,6 +93,7 @@ export const EditEducation = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarUser />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

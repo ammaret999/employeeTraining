@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { NavbarAdmin } from "../../components/NavbarAdmin";
 import { useEffect, useState } from "react";
 import { TitleNameEdit } from "../../types";
+import { CheckLogin } from "../../components";
 
 export const EditTitleName = () => {
   const [edit, setEdit] = useState<TitleNameEdit>({
@@ -20,7 +21,11 @@ export const EditTitleName = () => {
   };
 
   const getTitleNameByCode = () => {
-    fetch(`http://localhost:8080/admin/title/${code}`)
+    fetch(`http://localhost:8080/admin/title/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setEdit(res);
@@ -40,6 +45,7 @@ export const EditTitleName = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
           },
           body: JSON.stringify(edit),
         }
@@ -59,6 +65,7 @@ export const EditTitleName = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

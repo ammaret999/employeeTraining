@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getPosition } from "../../services";
-import { NavbarAdmin, PositionCard } from "../../components";
+import { CheckLogin, NavbarAdmin, PositionCard } from "../../components";
 import { Position } from "../../types";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +14,7 @@ export const PositionPage = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

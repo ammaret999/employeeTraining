@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavbarAdmin } from "../../components/NavbarAdmin";
 import { useNavigate } from "react-router-dom";
 import { DepartmentCreate } from "../../types";
+import { CheckLogin } from "../../components";
 
 export const CreateDepartment = () => {
   const [formData, setFormData] = useState<DepartmentCreate>({
@@ -24,6 +25,7 @@ export const CreateDepartment = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
         },
         body: JSON.stringify(formData),
       });
@@ -42,6 +44,7 @@ export const CreateDepartment = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

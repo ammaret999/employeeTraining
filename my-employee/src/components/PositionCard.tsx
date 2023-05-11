@@ -19,6 +19,9 @@ export const PositionCard: React.FC<PositionCardProps> = ({
   function deletePosition(code: string) {
     fetch(`http://localhost:8080/admin/position/${code}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
     }).then((result) => {
       result.json();
     });

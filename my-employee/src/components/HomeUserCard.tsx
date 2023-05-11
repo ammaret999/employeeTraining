@@ -17,7 +17,11 @@ export const HomeUserCard: React.FC<Employee> = ({
   const [imageBase64, setImageBase64] = useState<ImageBase64>();
 
   useEffect(() => {
-    fetch(`http://localhost:8080/file/${code}`)
+    fetch(`http://localhost:8080/file/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((Response) => Response.json())
       .then((imageBase64) => setImageBase64(imageBase64));
   }, []);

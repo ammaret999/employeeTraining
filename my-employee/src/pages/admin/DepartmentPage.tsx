@@ -4,6 +4,7 @@ import { Department } from "../../types";
 import { useEffect, useState } from "react";
 import { getDepartment } from "../../services";
 import { useNavigate } from "react-router-dom";
+import { CheckLogin } from "../../components";
 export const DepartmentPage = () => {
   const [department, setDepartment] = useState<Department[]>([]);
   const navagate = useNavigate();
@@ -13,6 +14,7 @@ export const DepartmentPage = () => {
   }, []);
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

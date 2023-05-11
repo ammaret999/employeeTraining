@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavbarUser } from "../../components";
+import { CheckLogin, NavbarUser } from "../../components";
 import { CertificateEdit } from "../../types";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -25,7 +25,11 @@ export const EditCertificate = () => {
   };
 
   const getCertificateByCode = () => {
-    fetch(`http://localhost:8080/certificate/${code}`)
+    fetch(`http://localhost:8080/certificate/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setEdit(res);
@@ -45,6 +49,7 @@ export const EditCertificate = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
           },
           body: JSON.stringify(edit),
         }
@@ -61,6 +66,7 @@ export const EditCertificate = () => {
   };
   return (
     <>
+      <CheckLogin />
       <NavbarUser />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

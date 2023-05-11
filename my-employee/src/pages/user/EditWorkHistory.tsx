@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavbarUser } from "../../components";
+import { CheckLogin, NavbarUser } from "../../components";
 import { WorkHistoryEdit } from "../../types/workHistory";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -27,7 +27,11 @@ export const EditWorkHistory = () => {
   };
 
   const getHistoryByCode = () => {
-    fetch(`http://localhost:8080/work/${code}`)
+    fetch(`http://localhost:8080/work/${code}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setEdit(res);
@@ -45,6 +49,7 @@ export const EditWorkHistory = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
         },
         body: JSON.stringify(edit),
       });
@@ -60,6 +65,7 @@ export const EditWorkHistory = () => {
   };
   return (
     <>
+      <CheckLogin />
       <NavbarUser />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

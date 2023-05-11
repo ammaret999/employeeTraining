@@ -23,6 +23,9 @@ export const EducationHistoryCard: React.FC<EducationCardProps> = ({
   function deleteEducationHistory(code: string) {
     fetch(`http://localhost:8080/education/${code}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
     }).then((result) => {
       result.json();
     });

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavbarAdmin } from "../../components/NavbarAdmin";
 import { PositionCreate } from "../../types";
 import { useNavigate } from "react-router-dom";
+import { CheckLogin } from "../../components";
 
 export const CreatePosition = () => {
   const [formData, setFormData] = useState<PositionCreate>({
@@ -27,6 +28,7 @@ export const CreatePosition = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
         },
         body: JSON.stringify(formData),
       });
@@ -45,6 +47,7 @@ export const CreatePosition = () => {
 
   return (
     <>
+      <CheckLogin />
       <NavbarAdmin />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

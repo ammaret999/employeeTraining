@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { NavbarUser } from "../../components";
+import { CheckLogin, NavbarUser } from "../../components";
 import { CertificateCreate } from "../../types";
 import { useState } from "react";
 export const CreateCertificate = () => {
@@ -27,6 +27,7 @@ export const CreateCertificate = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
           },
           body: JSON.stringify(formData),
         }
@@ -45,6 +46,7 @@ export const CreateCertificate = () => {
   };
   return (
     <>
+      <CheckLogin />
       <NavbarUser />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-2"></div>

@@ -12,6 +12,9 @@ export const GenderCard: React.FC<GenderCardProps> = ({ code, gender }) => {
   function deleteGender(code: string) {
     fetch(`http://localhost:8080/admin/gender/${code}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("tokenHeader")}`,
+      },
     }).then((result) => {
       result.json();
     });
