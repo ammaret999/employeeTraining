@@ -10,3 +10,4 @@ export * from "./CreateCertificate";
 export * from "./EditCertificate";
 export * from "./CreateEducation";
 export * from "./EditEducation";
+export * from "./SetToken";

@@ -3,7 +3,6 @@ import { NavbarUser, HomeUserCard, CheckLogin } from "../../components";
 import { getEmployee } from "../../services/homeUser";
 import { Employee } from "../../types";
 import { useParams } from "react-router-dom";
-import { getToken } from "../../services/token";
 import queryString from "query-string";
 
 export const Home = () => {
