@@ -20,10 +20,8 @@ export const SetToken = () => {
         }),
       });
       const data = await response.json();
-      const token = data.id_token;
+      const token = await data.id_token;
       setIdToken(token);
-      console.log(token);
-      console.log("---gettoken---");
     } catch (error) {
       console.error(error);
     }
@@ -31,7 +29,6 @@ export const SetToken = () => {
 
   const setTokenToLocal = () => {
     localStorage.removeItem("tokenHeader");
-    console.log(idToken);
     localStorage.setItem("tokenHeader", idToken);
     navagate(`/`);
   };
