@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 export const CheckLogin: FC = () => {
   const navagate = useNavigate();
-  //localStorage.getItem("tokenHeader") == ""
   const checkToken = () => {
     if (
       localStorage.getItem("tokenHeader") == "" ||
-      !localStorage.getItem("tokenHeader")
+      !localStorage.getItem("tokenHeader") ||
+      localStorage.getItem("tokenHeader") == undefined
     ) {
       navagate("/login");
     }
