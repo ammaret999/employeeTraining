@@ -1,5 +1,4 @@
-
-export const Login = () => {
+export const LoginAdmin = () => {
     return (
         <>
         <div className="hero min-h-screen" >
@@ -7,7 +6,7 @@ export const Login = () => {
           <div className="hero-content text-center text-neutral-content">
             <div className="max-w-md">
               <h1 className="mb-5 text-5xl font-bold">Login with Google</h1>
-              <p className="mb-5 text-2xl">User</p>
+              <p className="mb-5 text-2xl">Admin</p>
               <a className="btn btn-primary" href="http://localhost:8080/oauth2/authorization/google">Login with Google</a>
             </div>
           </div>
