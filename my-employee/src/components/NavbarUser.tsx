@@ -28,7 +28,11 @@ export const NavbarUser: React.FC = () => {
           </div>
 
           <div className="dropdown dropdown-end">
-            <a className="btn" href="http://localhost:8080/logout">
+            <a
+              className="btn"
+              href="http://localhost:8080/logout"
+              onClick={() => localStorage.removeItem("tokenHeader")}
+            >
               Logout
             </a>
           </div>
